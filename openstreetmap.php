@@ -58,7 +58,8 @@ class YellowOpenStreetMap {
             if (empty($zoom)) $zoom = $this->yellow->system->get("openstreetmapZoom");
             if (empty($style)) $style = $this->yellow->system->get("openstreetmapStyle");
             if (empty($layer)) $style = $this->yellow->system->get("openstreetmapLayer");
-            list($lat, $lon) = explode("/", $address);
+            if (substr($address, 0, 4) == "geo:") $address = (substr($address, 4));
+            list($lat, $lon) = preg_split("/[,;\/]/", $address);
             list($layer, $marker) = explode("+", $layer);
             $layer = $layers[$layer];
             $bbox = coordToBbox($lat, $lon, $zoom, (is_numeric($width) ? $width : 1), $height);
