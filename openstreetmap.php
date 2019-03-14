@@ -79,8 +79,9 @@ class YellowOpenStreetMap {
     }
     // https://wiki.openstreetmap.org/wiki/Nominatim#Address_lookup
     function geolocation($address) {
-        $email = $this->yellow->system->get("email");
-        $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&email=$email&q=$address");
+        $ua = ini_set("user_agent", "Yellow OpenStreetMap extension 0.8.2");
+        $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=$address");
+        ini_set("user_agent", $ua);
         if ($nominatim) {
             $lat = $nominatim->place["lat"];
             $lon = $nominatim->place["lon"];
