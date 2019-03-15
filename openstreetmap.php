@@ -78,7 +78,7 @@ class YellowOpenStreetMap {
        return "$lon_s,$lat_s,$lon_e,$lat_e";
     }
     // https://wiki.openstreetmap.org/wiki/Nominatim#Address_lookup
-    function geolocation($address) {
+    function nominatim($address) {
         $ua = ini_set("user_agent", "Yellow OpenStreetMap extension ". $this::VERSION);
         $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=$address");
         ini_set("user_agent", $ua);
@@ -87,5 +87,26 @@ class YellowOpenStreetMap {
             $lon = $nominatim->place["lon"];
             return array((float)$lat, (float)$lon);
         }
+    }
+    function geolocation($address) {
+        $extensionDir = $this->yellow->system->get("extensionDir");
+        $fileHandle = @fopen("{$extensionDir}openstreetmap.csv", "r");
+        if ($fileHandle) {
+            while ($data = fgetcsv($fileHandle)) {
+                $cache[$data[0]] = array($data[1], $data[2]);
+            }
+            fclose($fileHandle);
+        }
+        if (!isset($cache[$address])) {
+            $cache[$address] = $this->nominatim($address);
+            if ($cache[$address][0] && $cache[$address][1]) {
+                $fileHandle = @fopen("{$extensionDir}openstreetmap.csv", "w");
+                foreach ($cache as $addr => $coord) {
+                    fputcsv($fileHandle, array($addr, $coord[0], $coord[1]));
+                }
+                fclose($fileHandle);
+            }
+        }
+        return $cache[$address];
     }
 }

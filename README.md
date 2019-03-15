@@ -18,16 +18,16 @@ Create a `[openstreetmap]` shortcut.
 
 The following arguments are available, all but the first argument are optional:
 
-`Address` = either geo URI (i.e. coordinates separated with a `,` without spaces, optionally prefixed with the scheme `geo:`) or textual address (wrap multiple words into quotes)  
+`Address` = either textual address (wrap multiple words into quotes) or geo URI (i.e. coordinates separated with a `,` without spaces, optionally prefixed with the scheme `geo:`)  
 `Zoom` = zoom value from 0 to 19, the default zoom is 15  
 `Style` = map style, e.g. `left`, `center`, `right`; the default style is `center`  
 `Width` = map width, pixel or percent; the deafult is 450  
 `Height` = map height, pixel; the default is 450  
 `Layer` = map layer: you can choose between `standard`, `cycle`, `transport`, `humanitarian` (see [explication](https://wiki.openstreetmap.org/wiki/Browsing#Layers)); append `+marker` (e.g. `standard+marker`) to add the marker; the default is `standard`  
 
-Geo URIs make the maps load faster and allow a greater precision. For getting the exact coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; the coordinates are the last numbers in the URL shown in the browser (if the URL `https://www.openstreetmap.org/#map=17/41.85181/12.62127` the coordinates are `41.85181,12.62127`). To be as precise as possible, select the *Share* icon on the right, select *Include marker*, and drag the marker onto the point that will be the center of the embedded map.
+Textual addresses use [OSM's Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) service and results are cached in `system/extensions/openstreetmap.csv` (cache can be safely deleted).
 
-Textual addresses use OSM's Nominatim service. Please check the [Nominatim Usage Policy](https://operations.osmfoundation.org/policies/nominatim/): no heavy use is allowed and the number of web visitors must be moderate.
+Geo URIs allow a greater precision. For getting the exact coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; the coordinates are the last numbers in the URL shown in the browser (if the URL `https://www.openstreetmap.org/#map=17/41.85181/12.62127` the coordinates are `41.85181,12.62127`). To be as precise as possible, select the *Share* icon on the right, select *Include marker*, and drag the marker onto the point that will be the center of the embedded map.
 
 ## How to configure OpenStreetMap
 
