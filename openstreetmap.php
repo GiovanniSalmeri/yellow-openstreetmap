@@ -22,7 +22,7 @@ class YellowOpenStreetMap {
     public function onParseContentShortcut($page, $name, $text, $type) {
         $output = null;
         if ($name=="openstreetmap" && ($type=="block" || $type=="inline")) {
-            $layers = [
+            $LAYERS = [
                 'standard' => 'mapnik',
                 'transport' => 'transportmap',
                 'cycle' => 'cyclemap',
@@ -40,7 +40,7 @@ class YellowOpenStreetMap {
             if (!is_numeric($lat) || !is_numeric($lon)) list($lat, $lon) = $this->geolocation($address);
 
             list($layer, $marker) = explode("+", $layer);
-            $layer = $layers[$layer];
+            $layer = $LAYERS[$layer];
 
             $bbox = $this->coordToBbox($lat, $lon, $zoom, (is_numeric($width) ? $width : 1), $height);
             $output = "<div class=\"".htmlspecialchars($style)."\">";
@@ -83,14 +83,14 @@ class YellowOpenStreetMap {
         $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=$address");
         ini_set("user_agent", $ua);
         if ($nominatim) {
-            $lat = $nominatim->place["lat"];
-            $lon = $nominatim->place["lon"];
-            return array((float)$lat, (float)$lon);
+            $lat = (float)$nominatim->place["lat"];
+            $lon = (float)$nominatim->place["lon"];
+            return array($lat, $lon);
         }
     }
     function geolocation($address) {
-        $extensionDir = $this->yellow->system->get("extensionDir");
-        $fileHandle = @fopen("{$extensionDir}openstreetmap.csv", "r");
+        $cacheFile = $this->yellow->system->get("extensionDir")."openstreetmap.csv";
+        $fileHandle = @fopen($cacheFile, "r");
         if ($fileHandle) {
             while ($data = fgetcsv($fileHandle)) {
                 $cache[$data[0]] = array($data[1], $data[2]);
@@ -99,8 +99,8 @@ class YellowOpenStreetMap {
         }
         if (!isset($cache[$address])) {
             $cache[$address] = $this->nominatim($address);
-            if ($cache[$address][0] && $cache[$address][1]) {
-                $fileHandle = @fopen("{$extensionDir}openstreetmap.csv", "w");
+            if (isset($cache[$address][0]) && isset($cache[$address][1])) {
+                $fileHandle = @fopen($cacheFile, "w");
                 foreach ($cache as $addr => $coord) {
                     fputcsv($fileHandle, array($addr, $coord[0], $coord[1]));
                 }
