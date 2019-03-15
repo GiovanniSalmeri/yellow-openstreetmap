@@ -79,7 +79,7 @@ class YellowOpenStreetMap {
     }
     // https://wiki.openstreetmap.org/wiki/Nominatim#Address_lookup
     function geolocation($address) {
-        $ua = ini_set("user_agent", "Yellow OpenStreetMap extension 0.8.2");
+        $ua = ini_set("user_agent", "Yellow OpenStreetMap extension ". $this::VERSION);
         $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=$address");
         ini_set("user_agent", $ua);
         if ($nominatim) {
