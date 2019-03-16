@@ -37,6 +37,7 @@ class YellowOpenStreetMap {
 
             if (substr($address, 0, 4) == "geo:") $address = (substr($address, 4));
             list($lat, $lon) = explode(",", explode(";", $address)[0]);
+            $lat = trim($lat); $lon = trim($lon);
             if (!is_numeric($lat) || !is_numeric($lon)) list($lat, $lon) = $this->geolocation($address);
 
             list($layer, $marker) = explode("+", $layer);

@@ -18,7 +18,7 @@ Create a `[openstreetmap]` shortcut.
 
 The following arguments are available, all but the first argument are optional:
 
-`Address` = either textual address (wrap multiple words into quotes) or geo URI (i.e. coordinates separated with a `,` without spaces, optionally prefixed with the scheme `geo:`)  
+`Address` = textual address (wrap multiple words into quotes) or GPS coordinates or [geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme)
 `Zoom` = zoom value from 0 to 19, the default zoom is 15  
 `Style` = map style, e.g. `left`, `center`, `right`; the default style is `center`  
 `Width` = map width, pixel or percent; the deafult is 450  
@@ -27,7 +27,7 @@ The following arguments are available, all but the first argument are optional:
 
 Textual addresses use [OSM's Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) service and results are cached in `system/extensions/openstreetmap.csv` (cache can be safely deleted).
 
-Geo URIs allow a greater precision. For getting the exact coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; the coordinates are the last numbers in the URL shown in the browser (if the URL `https://www.openstreetmap.org/#map=17/41.85181/12.62127` the coordinates are `41.85181,12.62127`). To be as precise as possible, select the *Share* icon on the right, select *Include marker*, and drag the marker onto the point that will be the center of the embedded map.
+GPS coordinates and geo URIs allow a greater precision. For getting the exact coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; the coordinates are the last numbers in the URL shown in the browser (if the URL `https://www.openstreetmap.org/#map=17/41.85181/12.62127` the coordinates are `41.85181, 12.62127`). To be as precise as possible, select the *Share* icon on the right, select *Include marker*, and drag the marker onto the point that will be the center of the embedded map.
 
 ## How to configure OpenStreetMap
 
@@ -43,10 +43,19 @@ The following settings can be configured in file `system/settings/system.ini`.
 
 Embedding a map:
 
-    [openstreetmap 41.85181,12.62127]
     [openstreetmap "Via Columbia 1 Roma"]
-    [openstreetmap 41.85181,12.62127 17 center 600 400 standard+marker]
-    [openstreetmap 41.85181,12.62127 17 center 100% 400 transport]
+    [openstreetmap "Via Columbia 1 Roma" 17 center 600 400 standard+marker]
+
+Embedding a map, GPS coordinates:
+
+    [openstreetmap "41.85181, 12.62127"]
+    [openstreetmap "41.85181, 12.62127" 17 center 600 400 standard+marker]
+
+Embedding a map, geo URIs:
+
+    [openstreetmap geo:41.85181,12.62127]
+    [openstreetmap geo:41.85181,12.62127 17 center 600 400 standard+marker]
+
 
 ## Developer
 
