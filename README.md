@@ -18,7 +18,7 @@ Create a `[openstreetmap]` shortcut.
 
 The following arguments are available, all but the first argument are optional:
 
-`Address` = textual address (wrap multiple words into quotes) or GPS coordinates or [geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme)
+`Address` = textual address (wrap multiple words into quotes) or GPS coordinates or [geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme)  
 `Zoom` = zoom value from 0 to 19, the default zoom is 15  
 `Style` = map style, e.g. `left`, `center`, `right`; the default style is `center`  
 `Width` = map width, pixel or percent; the deafult is 450  
