@@ -11,11 +11,11 @@ class YellowOpenStreetMap {
     // Handle initialisation
     public function onLoad($yellow) {
         $this->yellow = $yellow;
-        $this->yellow->system->setDefault("openstreetmapZoom", "15");
-        $this->yellow->system->setDefault("openstreetmapStyle", "center");
-        $this->yellow->system->setDefault("openstreetmapWidth", "450");
-        $this->yellow->system->setDefault("openstreetmapHeight", "450");
-        $this->yellow->system->setDefault("openstreetmapLayer", "standard");
+        $this->yellow->system->setDefault("openstreetmapZoom", "14");
+        $this->yellow->system->setDefault("openstreetmapStyle", "flexible");
+        $this->yellow->system->setDefault("openstreetmapWidth", "300");
+        $this->yellow->system->setDefault("openstreetmapHeight", "150");
+        $this->yellow->system->setDefault("openstreetmapLayer", "standard+marker");
     }
     
     // Handle page content parsing of custom block
@@ -33,7 +33,7 @@ class YellowOpenStreetMap {
             if (empty($height)) $height = $this->yellow->system->get("openstreetmapHeight");
             if (empty($zoom)) $zoom = $this->yellow->system->get("openstreetmapZoom");
             if (empty($style)) $style = $this->yellow->system->get("openstreetmapStyle");
-            if (empty($layer)) $style = $this->yellow->system->get("openstreetmapLayer");
+            if (empty($layer)) $layer = $this->yellow->system->get("openstreetmapLayer");
 
             if (substr($address, 0, 4) == "geo:") $address = (substr($address, 4));
             list($lat, $lon) = explode(",", explode(";", $address)[0]);

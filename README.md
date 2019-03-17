@@ -19,11 +19,11 @@ Create a `[openstreetmap]` shortcut.
 The following arguments are available, all but the first argument are optional:
 
 `Address` = textual address (wrap multiple words into quotes) or GPS coordinates or [geo URI](https://en.wikipedia.org/wiki/Geo_URI_scheme)  
-`Zoom` = zoom value from 0 to 19, the default zoom is 15  
-`Style` = map style, e.g. `left`, `center`, `right`; the default style is `center`  
-`Width` = map width, pixel or percent; the deafult is 450  
-`Height` = map height, pixel; the default is 450  
-`Layer` = map layer: you can choose between `standard`, `cycle`, `transport`, `humanitarian` (see [explication](https://wiki.openstreetmap.org/wiki/Browsing#Layers)); append `+marker` (e.g. `standard+marker`) to add the marker; the default is `standard`  
+`Zoom` = zoom value from 0 to 19  
+`Style` = map style, e.g. `left`, `center`, `right`, `flexible`  
+`Width` = map width, pixel or percent  
+`Height` = map height  
+`Layer` = map layer: you can choose between `standard`, `cycle`, `transport`, `humanitarian` (see [explication](https://wiki.openstreetmap.org/wiki/Browsing#Layers)); append `+marker` to add the marker  
 
 Textual addresses use [OSM's Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) service and results are cached in `system/extensions/openstreetmap.csv` (cache can be safely deleted).
 
@@ -33,11 +33,11 @@ GPS coordinates and geo URIs allow a greater precision. For getting the exact co
 
 The following settings can be configured in file `system/settings/system.ini`.
 
-`openstreetmapZoom` (default:  `15`) = default zoom  
-`openstreetmapStyle` (default:  `center`) = default style  
-`openstreetmapWidth` (default:  `450`) = default width  
-`openstreetmapHeight` (default:  `450`) = default height  
-`openstreetmapLayer` (default:  `standard`) = default layer  
+`openstreetmapZoom` (default:  `14`) = default zoom  
+`openstreetmapStyle` (default:  `flexible`) = default style  
+`openstreetmapWidth` (default:  `300`) = default width  
+`openstreetmapHeight` (default:  `150`) = default height  
+`openstreetmapLayer` (default:  `standard+marker`) = default layer  
 
 ## Example
 
