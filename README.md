@@ -1,4 +1,4 @@
-Openstreetmap 0.8.2
+Openstreetmap 0.8.3
 ================
 Embed OpenStreetMap maps.
 
