@@ -4,9 +4,10 @@
 // This file may be used and distributed under the terms of the public license.
 
 class YellowOpenStreetMap {
-    const VERSION = "0.8.3";
+    const VERSION = "0.8.2";
     const TYPE = "feature";
     public $yellow;         //access to API
+
    
     // Handle initialisation
     public function onLoad($yellow) {
@@ -38,13 +39,14 @@ class YellowOpenStreetMap {
             if (substr($address, 0, 4) == "geo:") $address = (substr($address, 4));
             list($lat, $lon) = explode(",", explode(";", $address)[0]);
             $lat = trim($lat); $lon = trim($lon);
+
             if (!is_numeric($lat) || !is_numeric($lon)) list($lat, $lon) = $this->geolocation($address);
 
             list($layer, $marker) = explode("+", $layer);
             $layer = $LAYERS[$layer];
 
             $bbox = $this->coordToBbox($lat, $lon, $zoom, (is_numeric($width) ? $width : 1), $height);
-            $output = "<div class=\"".htmlspecialchars($style)."\">";
+            $output = "<div class=\"".htmlspecialchars($style)." map\">";
             $output .= "<iframe src=\"https://www.openstreetmap.org/export/embed.html?bbox=".rawurlencode($bbox)."&amp;layer=".$layer;
             if ($marker == "marker") $output .= "&amp;marker=".rawurlencode("$lat,$lon");
             $output .= "\" frameborder=\"0\"";
@@ -91,7 +93,7 @@ class YellowOpenStreetMap {
     }
     function geolocation($address) {
         $cacheFile = $this->yellow->system->get("extensionDir")."openstreetmap.csv";
-        $fileHandle = @fopen($cacheFile, "r");
+        $fileHandle = fopen($cacheFile, "r");
         if ($fileHandle) {
             while ($data = fgetcsv($fileHandle)) {
                 $cache[$data[0]] = array($data[1], $data[2]);
@@ -110,4 +112,15 @@ class YellowOpenStreetMap {
         }
         return $cache[$address];
     }
+
+    // Handle page extra data
+    public function onParsePageExtra($page, $name) {
+        $output = null;
+        if ($name=="header") {
+            $extensionLocation = $this->yellow->system->get("serverBase").$this->yellow->system->get("extensionLocation");
+            $output .= "<script type=\"text/javascript\" defer=\"defer\" src=\"{$extensionLocation}openstreetmap.js\"></script>\n";
+        }
+        return $output;
+    }
+
 }
