@@ -70,7 +70,7 @@ class YellowOpenStreetMap {
        return array($lat_deg, $lon_deg);
     }
     function coordToBbox($lat, $lon, $zoom, $width, $height) {
-       define(TILE_SIZE, 256);
+       define("TILE_SIZE", 256);
        list($xtile, $ytile) = $this->getTileNumber($lat, $lon, $zoom);
        $xtile_s = ($xtile * TILE_SIZE - $width/2) / TILE_SIZE;
        $ytile_s = ($ytile * TILE_SIZE - $height/2) / TILE_SIZE;
