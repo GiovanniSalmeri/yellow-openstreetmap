@@ -4,7 +4,7 @@
 // This file may be used and distributed under the terms of the public license.
 
 class YellowOpenStreetMap {
-    const VERSION = "0.8.2";
+    const VERSION = "0.8.9";
     const TYPE = "feature";
     public $yellow;         //access to API
 
@@ -92,7 +92,7 @@ class YellowOpenStreetMap {
         }
     }
     function geolocation($address) {
-        $cacheFile = $this->yellow->system->get("extensionDir")."openstreetmap.csv";
+        $cacheFile = $this->yellow->system->get("coreExtensionDir")."openstreetmap.csv";
         $fileHandle = fopen($cacheFile, "r");
         if ($fileHandle) {
             while ($data = fgetcsv($fileHandle)) {
@@ -117,7 +117,7 @@ class YellowOpenStreetMap {
     public function onParsePageExtra($page, $name) {
         $output = null;
         if ($name=="header") {
-            $extensionLocation = $this->yellow->system->get("serverBase").$this->yellow->system->get("extensionLocation");
+            $extensionLocation = $this->yellow->system->get("coreServerBase").$this->yellow->system->get("coreExtensionLocation");
             $output .= "<script type=\"text/javascript\" defer=\"defer\" src=\"{$extensionLocation}openstreetmap.js\"></script>\n";
         }
         return $output;
