@@ -92,7 +92,7 @@ class YellowOpenstreetmap {
     }
     function geolocation($address) {
         $cacheFile = $this->yellow->system->get("coreExtensionDir")."openstreetmap.csv";
-        $fileHandle = fopen($cacheFile, "r");
+        $fileHandle = @fopen($cacheFile, "r");
         if ($fileHandle) {
             while ($data = fgetcsv($fileHandle)) {
                 $cache[$data[0]] = array($data[1], $data[2]);
