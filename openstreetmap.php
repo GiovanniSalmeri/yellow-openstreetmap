@@ -1,14 +1,13 @@
 <?php
-// OpenStreetMap extension
+// Openstreetmap extension
 // Copyright (c) 2019 Giovanni Salmeri
 // This file may be used and distributed under the terms of the public license.
 
-class YellowOpenStreetMap {
+class YellowOpenstreetmap {
     const VERSION = "0.8.9";
     const TYPE = "feature";
     public $yellow;         //access to API
 
-   
     // Handle initialisation
     public function onLoad($yellow) {
         $this->yellow = $yellow;

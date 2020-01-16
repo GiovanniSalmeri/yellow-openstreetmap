@@ -1,5 +1,5 @@
-# Openstreetmap 0.8.9
-
+Openstreetmap 0.8.9
+===================
 Embed OpenStreetMap maps.
 
 <p align="center"><img src="openstreetmap-screenshot.png?raw=true" alt="Screenshot"></p>
@@ -29,15 +29,15 @@ Textual addresses use [OSM's Nominatim](https://wiki.openstreetmap.org/wiki/Nomi
 
 GPS coordinates and geo URIs allow a greater precision. For getting the exact coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; the coordinates are the last numbers in the URL shown in the browser (if the URL `https://www.openstreetmap.org/#map=17/41.85181/12.62127` the coordinates are `41.85181, 12.62127`). To be as precise as possible, select the *Share* icon on the right, select *Include marker*, and drag the marker onto the point that will be the center of the embedded map.
 
-## How to configure OpenStreetMap
+## Settings
 
-The following settings can be configured in file `system/settings/system.ini`.
+The following settings can be configured in file `system/settings/system.ini`:
 
-`openstreetmapZoom` (default:  `14`) = default zoom  
-`openstreetmapStyle` (default:  `flexible`) = default style  
-`openstreetmapWidth` (default:  `300`) = default width  
-`openstreetmapHeight` (default:  `150`) = default height  
-`openstreetmapLayer` (default:  `standard+marker`) = default layer  
+`OpenstreetmapZoom` (default:  `14`) = default zoom  
+`OpenstreetmapStyle` (default:  `flexible`) = default style  
+`OpenstreetmapWidth` (default:  `300`) = default width  
+`OpenstreetmapHeight` (default:  `150`) = default height  
+`OpenstreetmapLayer` (default:  `standard+marker`) = default layer  
 
 ## Example
 
@@ -55,7 +55,6 @@ Embedding a map, geo URIs:
 
     [openstreetmap geo:41.85181,12.62127]
     [openstreetmap geo:41.85181,12.62127 17 center 600 400 standard+marker]
-
 
 ## Developer
 
