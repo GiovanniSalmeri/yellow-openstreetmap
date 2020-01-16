@@ -41,7 +41,7 @@ The following settings can be configured in file `system/settings/system.ini`:
 
 The following files can be configured:
 
-`system/extensions/openstreetmap.csv` = cached coordinates  
+`system/extensions/openstreetmap.csv` = cached addresses and coordinates  
 
 ## Example
 
