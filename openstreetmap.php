@@ -1,11 +1,8 @@
 <?php
-// Openstreetmap extension
-// Copyright (c) 2019 Giovanni Salmeri
-// This file may be used and distributed under the terms of the public license.
+// Openstreetmap extension, https://github.com/GiovanniSalmeri/yellow-openstreetmap
 
 class YellowOpenstreetmap {
-    const VERSION = "0.8.9";
-    const TYPE = "feature";
+    const VERSION = "0.8.10";
     public $yellow;         //access to API
 
     // Handle initialisation
@@ -22,13 +19,12 @@ class YellowOpenstreetmap {
     public function onParseContentShortcut($page, $name, $text, $type) {
         $output = null;
         if ($name=="openstreetmap" && ($type=="block" || $type=="inline")) {
-            $LAYERS = [
-                'standard' => 'mapnik',
-                'transport' => 'transportmap',
-                'cycle' => 'cyclemap',
-                'humanitarian' => 'hot',
-            ];
-            list($address, $zoom, $style, $width, $height, $layer) = $this->yellow->toolbox->getTextArgs($text);
+            $layers = array(
+                "standard" => "mapnik",
+                "transport" => "transportmap",
+                "cycle" => "cyclemap",
+                "humanitarian" => "hot");
+            list($address, $zoom, $style, $width, $height, $layer) = $this->yellow->toolbox->getTextArguments($text);
             if (empty($width)) $width = $this->yellow->system->get("openstreetmapWidth");
             if (empty($height)) $height = $this->yellow->system->get("openstreetmapHeight");
             if (empty($zoom)) $zoom = $this->yellow->system->get("openstreetmapZoom");
@@ -36,13 +32,11 @@ class YellowOpenstreetmap {
             if (empty($layer)) $layer = $this->yellow->system->get("openstreetmapLayer");
 
             if (substr($address, 0, 4) == "geo:") $address = (substr($address, 4));
-            list($lat, $lon) = explode(",", explode(";", $address)[0]);
+            list($lat, $lon) = $this->yellow->toolbox->getTextList($address, ",", 2);
             $lat = trim($lat); $lon = trim($lon);
-
             if (!is_numeric($lat) || !is_numeric($lon)) list($lat, $lon) = $this->geolocation($address);
-
-            list($layer, $marker) = explode("+", $layer);
-            $layer = $LAYERS[$layer];
+            list($layer, $marker) = $this->yellow->toolbox->getTextList($layer, "+", 2);
+            $layer = $layers[$layer];
 
             $bbox = $this->coordToBbox($lat, $lon, $zoom, (is_numeric($width) ? $width : 1), $height);
             $output = "<div class=\"".htmlspecialchars($style)." map\">";
@@ -58,7 +52,7 @@ class YellowOpenstreetmap {
 
     // https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
     function getTileNumber($lat, $lon, $zoom) {
-       $xtile = (($lon + 180) / 360) * pow(2, $zoom); // no rounding with floor()
+       $xtile = (($lon + 180) / 360) * pow(2, $zoom);
        $ytile = (1 - log(tan(deg2rad($lat)) + 1 / cos(deg2rad($lat))) / pi()) /2 * pow(2, $zoom);
        return array($xtile, $ytile);
     }
@@ -69,12 +63,12 @@ class YellowOpenstreetmap {
        return array($lat_deg, $lon_deg);
     }
     function coordToBbox($lat, $lon, $zoom, $width, $height) {
-       define("TILE_SIZE", 256);
+       $tileSize = 256;
        list($xtile, $ytile) = $this->getTileNumber($lat, $lon, $zoom);
-       $xtile_s = ($xtile * TILE_SIZE - $width/2) / TILE_SIZE;
-       $ytile_s = ($ytile * TILE_SIZE - $height/2) / TILE_SIZE;
-       $xtile_e = ($xtile * TILE_SIZE + $width/2) / TILE_SIZE;
-       $ytile_e = ($ytile * TILE_SIZE + $height/2) / TILE_SIZE;
+       $xtile_s = ($xtile * $tileSize - $width/2) / $tileSize;
+       $ytile_s = ($ytile * $tileSize - $height/2) / $tileSize;
+       $xtile_e = ($xtile * $tileSize + $width/2) / $tileSize;
+       $ytile_e = ($ytile * $tileSize + $height/2) / $tileSize;
        list($lat_s, $lon_s) = $this->getCoord($xtile_s, $ytile_s, $zoom);
        list($lat_e, $lon_e) = $this->getCoord($xtile_e, $ytile_e, $zoom);
        return "$lon_s,$lat_s,$lon_e,$lat_e";
@@ -88,11 +82,14 @@ class YellowOpenstreetmap {
             $lat = (float)$nominatim->place["lat"];
             $lon = (float)$nominatim->place["lon"];
             return array($lat, $lon);
+        } else {
+            return array(0, 0);
         }
     }
     function geolocation($address) {
-        $cacheFile = $this->yellow->system->get("coreExtensionDir")."openstreetmap.csv";
-        $fileHandle = @fopen($cacheFile, "r");
+        $cache = array();
+        $fileName = $this->yellow->system->get("coreExtensionDirectory")."openstreetmap.csv";
+        $fileHandle = @fopen($fileName, "r");
         if ($fileHandle) {
             while ($data = fgetcsv($fileHandle)) {
                 $cache[$data[0]] = array($data[1], $data[2]);
@@ -102,11 +99,15 @@ class YellowOpenstreetmap {
         if (!isset($cache[$address])) {
             $cache[$address] = $this->nominatim($address);
             if (isset($cache[$address][0]) && isset($cache[$address][1])) {
-                $fileHandle = @fopen($cacheFile, "w");
-                foreach ($cache as $addr => $coord) {
-                    fputcsv($fileHandle, array($addr, $coord[0], $coord[1]));
+                $fileHandle = @fopen($fileName, "w");
+                if ($fileHandle) {
+                    foreach ($cache as $addr => $coord) {
+                        fputcsv($fileHandle, array($addr, $coord[0], $coord[1]));
+                    }
+                    fclose($fileHandle);
+                } else {
+                    $this->yellow->log("error", "Can't write file '$fileName'!");
                 }
-                fclose($fileHandle);
             }
         }
         return $cache[$address];
