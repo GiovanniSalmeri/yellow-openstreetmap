@@ -76,7 +76,7 @@ class YellowOpenstreetmap {
     // https://wiki.openstreetmap.org/wiki/Nominatim#Address_lookup
     function nominatim($address) {
         $ua = ini_set("user_agent", "Yellow OpenStreetMap extension ". $this::VERSION);
-        $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=$address");
+        $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=".rawurlencode($address));
         ini_set("user_agent", $ua);
         if ($nominatim) {
             $lat = (float)$nominatim->place["lat"];
