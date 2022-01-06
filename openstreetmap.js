@@ -1,3 +1,5 @@
+// Openstreetmap extension, https://github.com/GiovanniSalmeri/yellow-openstreetmap
+
 "use strict";
 document.addEventListener("DOMContentLoaded", function() {
     // https://github.com/kylelam/kylelam.github.io/blob/master/iframe.html
