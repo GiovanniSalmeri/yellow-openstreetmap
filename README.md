@@ -4,7 +4,7 @@ Embed OpenStreetMap maps.
 
 <p align="center"><img src="openstreetmap-screenshot.png?raw=true" alt="Screenshot"></p>
 
-## How to embed a map
+## How to show a map
 
 Create a `[openstreetmap]` shortcut.
 
@@ -21,17 +21,17 @@ GPS coordinates and geo URIs allow a greater precision. For getting the exact co
 
 ## Examples
 
-Embedding a map:
+Showing a map:
 
     [openstreetmap "Via Columbia 1 Roma"]
     [openstreetmap "Via Columbia 1 Roma" 17 center 600 400 standard+marker]
 
-Embedding a map, GPS coordinates:
+Showing a map, GPS coordinates:
 
     [openstreetmap "41.85181, 12.62127"]
     [openstreetmap "41.85181, 12.62127" 17 center 600 400 standard+marker]
 
-Embedding a map, geo URIs:
+Showing a map, geo URIs:
 
     [openstreetmap geo:41.85181,12.62127]
     [openstreetmap geo:41.85181,12.62127 17 center 600 400 standard+marker]
