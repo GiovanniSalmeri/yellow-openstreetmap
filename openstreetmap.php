@@ -101,8 +101,11 @@ class YellowOpenstreetmap {
             if (isset($cache[$address][0]) && isset($cache[$address][1])) {
                 $fileHandle = @fopen($fileName, "w");
                 if ($fileHandle) {
-                    foreach ($cache as $addr => $coord) {
-                        fputcsv($fileHandle, array($addr, $coord[0], $coord[1]));
+                    if (flock($fileHandle, LOCK_EX)) {
+                        foreach ($cache as $addr => $coord) {
+                            fputcsv($fileHandle, array($addr, $coord[0], $coord[1]));
+                        }
+                        flock($fileHandle, LOCK_UN);
                     }
                     fclose($fileHandle);
                 } else {
