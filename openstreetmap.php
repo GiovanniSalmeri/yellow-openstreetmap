@@ -52,20 +52,20 @@ class YellowOpenstreetmap {
     }
 
     // https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
-    function getTileNumber($lat, $lon, $zoom) {
+    private function getTileNumber($lat, $lon, $zoom) {
        $xtile = (($lon + 180) / 360) * (2 ** $zoom);
        $ytile = (1 - log(tan(deg2rad($lat)) + 1 / cos(deg2rad($lat))) / M_PI) /2 * (2 ** $zoom);
        return [ $xtile, $ytile ];
     }
 
-    function getCoordinates($xtile, $ytile, $zoom) {
+    private function getCoordinates($xtile, $ytile, $zoom) {
        $n = 2 ** $zoom;
        $lat_deg = rad2deg(atan(sinh(M_PI * (1 - 2 * $ytile / $n))));
        $lon_deg = $xtile / $n * 360 - 180;
        return [ $lat_deg, $lon_deg ];
     }
 
-    function coordinatesToBbox($lat, $lon, $zoom, $width, $height) {
+    private function coordinatesToBbox($lat, $lon, $zoom, $width, $height) {
        $tileSize = 256;
        list($xtile, $ytile) = $this->getTileNumber($lat, $lon, $zoom);
        $xtile_s = ($xtile * $tileSize - $width/2) / $tileSize;
@@ -78,7 +78,7 @@ class YellowOpenstreetmap {
     }
 
     // Get coordinates from physical address (https://wiki.openstreetmap.org/wiki/Nominatim#Address_lookup)
-    function nominatim($address) {
+    public function nominatim($address) {
         $ua = ini_set("user_agent", "Yellow OpenStreetMap extension ". $this::VERSION);
         $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=".rawurlencode($address));
         ini_set("user_agent", $ua);
@@ -92,7 +92,7 @@ class YellowOpenstreetmap {
     }
 
     // Get geolocation
-    function geolocation($address) {
+    private function geolocation($address) {
         $cache = [];
         $fileName = $this->yellow->system->get("coreExtensionDirectory")."openstreetmap.csv";
         $fileHandle = @fopen($fileName, "r");
