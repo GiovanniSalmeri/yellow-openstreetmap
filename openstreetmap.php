@@ -83,9 +83,7 @@ class YellowOpenstreetmap {
         $nominatim = json_decode(@file_get_contents("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=".rawurlencode($address)), true);
         ini_set("user_agent", $ua);
         if ($nominatim) {
-            $lat = (float)$nominatim[0]["lat"];
-            $lon = (float)$nominatim[0]["lon"];
-            return [ $lat, $lon ];
+            return [ (float)$nominatim[0]["lat"], (float)$nominatim[0]["lon"] ];
         } else {
             return [ 0, 0 ];
         }
