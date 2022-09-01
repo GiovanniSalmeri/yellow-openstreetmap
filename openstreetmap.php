@@ -102,7 +102,7 @@ class YellowOpenstreetmap {
         }
         if (!isset($cache[$address])) {
             $cache[$address] = $this->nominatim($address);
-            if (isset($cache[$address][0]) && isset($cache[$address][1])) {
+            if ($cache[$address]!==[ null, null ]) {
                 $fileHandle = @fopen($fileName, "w");
                 if ($fileHandle) {
                     if (flock($fileHandle, LOCK_EX)) {
