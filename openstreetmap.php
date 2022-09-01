@@ -40,7 +40,7 @@ class YellowOpenstreetmap {
             $layer = $layers[$layer];
 
             $bbox = $this->coordinatesToBbox($lat, $lon, $zoom, (is_numeric($width) ? $width : 1), $height);
-            $output = "<div class=\"".htmlspecialchars($style)." openstreemap\">";
+            $output = "<div class=\"".htmlspecialchars($style)." openstreetmap\">";
             $output .= "<iframe src=\"https://www.openstreetmap.org/export/embed.html?bbox=".rawurlencode($bbox)."&amp;layer=".$layer;
             if ($marker=="marker") $output .= "&amp;marker=".rawurlencode("$lat,$lon");
             $output .= "\" frameborder=\"0\"";
