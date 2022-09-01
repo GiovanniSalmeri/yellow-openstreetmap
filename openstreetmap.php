@@ -85,7 +85,7 @@ class YellowOpenstreetmap {
         if ($nominatim) {
             return [ (float)$nominatim[0]["lat"], (float)$nominatim[0]["lon"] ];
         } else {
-            return [ 0, 0 ];
+            return [ null, null ];
         }
     }
 
