@@ -77,14 +77,14 @@ class YellowOpenstreetmap {
        return "$lon_s,$lat_s,$lon_e,$lat_e";
     }
 
-    // Get coordinates from physical address (https://wiki.openstreetmap.org/wiki/Nominatim#Address_lookup)
+    // Get coordinates from physical address (https://nominatim.org/release-docs/develop/api/Search/)
     public function nominatim($address) {
-        $ua = ini_set("user_agent", "Yellow OpenStreetMap extension ". $this::VERSION);
-        $nominatim = simplexml_load_file("https://nominatim.openstreetmap.org/search?format=xml&q=".rawurlencode($address));
+        $ua = ini_set("user_agent", "Yellow Openstreetmap extension ". $this::VERSION);
+        $nominatim = json_decode(@file_get_contents("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=".rawurlencode($address)), true);
         ini_set("user_agent", $ua);
         if ($nominatim) {
-            $lat = (float)$nominatim->place["lat"];
-            $lon = (float)$nominatim->place["lon"];
+            $lat = (float)$nominatim[0]["lat"];
+            $lon = (float)$nominatim[0]["lon"];
             return [ $lat, $lon ];
         } else {
             return [ 0, 0 ];
