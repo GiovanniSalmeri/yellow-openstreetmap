@@ -34,8 +34,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 var markers = JSON.parse(div.textContent);
                 div.textContent = null;
                 var map = leaflet.map(div, { scrollWheelZoom: false });
-                map.on("focus", function() { map.scrollWheelZoom.enable(); });
-                map.on("blur", function() { map.scrollWheelZoom.disable(); });
+                map._container.style.cursor = "auto";
+                map.on("mousedown", function() {
+                    map.scrollWheelZoom.enable();
+                    map._container.style.cursor = "pointer";
+                });
+                map.on("mouseout", function() {
+                    map.scrollWheelZoom.disable();
+                    map._container.style.cursor = "auto";
+                });
                 leaflet.tileLayer(tileUrls[layerType], {
                     maxZoom: 19,
                     attribution: "© <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
