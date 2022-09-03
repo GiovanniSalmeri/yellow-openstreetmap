@@ -69,7 +69,7 @@ The following settings can be configured in file `system/extensions/yellow-syste
 
 [Download extension](https://github.com/GiovanniSalmeri/yellow-openstreetmap/archive/master.zip) and copy zip file into your `system/extensions` folder. Right click if you use Safari.
 
-This extension uses [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) for maps, [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) for address lookup, and [Leaflet](https://leafletjs.com/) by Vladimir Agafonkin for maps with points of interest.
+This extension uses [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) for maps, [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) for address lookup, and [Leaflet](https://leafletjs.com/) by Volodymyr Agafonkin for maps with points of interest.
 
 ## Developer
 
