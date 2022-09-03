@@ -23,8 +23,10 @@ To get the coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/
 
 Put the file into `media/openstreetmap/` with the extension `.csv`. Each point of interest is a line in CSV (comma-separated values) format in one of these two forms:
 
-`latitude,longitude,name,description`
-`textual address,city,name,description`
+```
+latitude,longitude,name,description
+textual address,city,name,description
+```
 
 Fields that cointain commas must be enclosed in quotes. The third and fourth field are optional, if provided they will be used for a popup.
 
