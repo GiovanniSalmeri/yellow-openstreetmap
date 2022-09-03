@@ -67,14 +67,14 @@ class YellowOpenstreetmap {
         if ($lines==false) return null;
         $data = [];
         foreach ($lines as $line) {
-            list($address, $title, $description) = array_pad(str_getcsv($line), 3, null);
-            list($lat, $lon) = $this->addressToCoordinates($address);
+            list($address1, $address2, $title, $description) = array_pad(str_getcsv($line), 4, null);
+            list($lat, $lon) = $this->addressToCoordinates("$address1,$address2");
             $data[] = [ $lat, $lon, $title, $description ];
         }
         return json_encode($data);
     }
 
-
+    // Return coordinates from address
     private function addressToCoordinates($address) {
         if (substr($address, 0, 4)=="geo:") $address = substr($address, 4); // undocumented
         list($lat, $lon) = $this->yellow->toolbox->getTextList($address, ",", 2);
