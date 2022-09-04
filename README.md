@@ -63,7 +63,7 @@ The following settings can be configured in file `system/extensions/yellow-syste
 `OpenstreetmapZoom` (default:  `14`) = default zoom  
 `OpenstreetmapStyle` (default:  `flexible`) = default style  
 `OpenstreetmapLayer` (default:  `standard+marker`) = default layer  
-`OpenstreetmapTransportApiKey` (default: none) = [API key](https://www.thunderforest.com/pricing/) for Transport layer (needed only for maps with points of interest)  
+`OpenstreetmapTransportApiKey` (default: none) = [API key](https://www.thunderforest.com/pricing/): needed only for maps with points of interest using the `transport` layer  
 
 ## Installation
 
