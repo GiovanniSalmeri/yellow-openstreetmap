@@ -17,7 +17,7 @@ The following arguments are available, all but the first argument are optional:
 `Height` = map height, pixel  
 `Layer` = [map layer](https://wiki.openstreetmap.org/wiki/Browsing#Layers): `standard`, `cycle`, `transport`, or `humanitarian`; append `+marker` to show the marker(s)  
 
-To get the coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; for more precision, select the "Share" icon on the right, then "Include marker", and drag the marker to the desidered location. The coordinates are the last numbers of the URL shown in the browser (if the URL `https://www.openstreetmap.org/#map=17/41.85181/12.62127` the coordinates are `41.85181, 12.62127`).
+To get the coordinates, go to [openstreetmap.org](https://www.openstreetmap.org/) and enter the address; for more precision, select the "Share" icon on the right, then "Include marker", and drag the marker to the desidered location. The coordinates are the last numbers of the URL shown in the browser (if the URL is `https://www.openstreetmap.org/#map=17/41.85181/12.62127`, the coordinates are `41.85181, 12.62127`).
 
 ## How to create a POI (points of interest) file
 
