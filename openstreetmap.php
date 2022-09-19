@@ -157,6 +157,7 @@ class YellowOpenstreetmap {
         $output = null;
         if ($name=="header") {
             $extensionLocation = $this->yellow->system->get("coreServerBase").$this->yellow->system->get("coreExtensionLocation");
+            $output .= "<script>var openstreetmapLeafletLocation = ".json_encode($extensionLocation."openstreetmap-leaflet/")."</script>\n";
             $openstreetmapTransportApiKey = $this->yellow->system->get("openstreetmapTransportApiKey");
             $output .= "<script>var openstreetmapTransportApiKey = ".json_encode($openstreetmapTransportApiKey)."</script>\n";
             $output .= "<script type=\"text/javascript\" defer=\"defer\" src=\"{$extensionLocation}openstreetmap.js\"></script>\n";

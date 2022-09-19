@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function() {
         var leafletCss = document.createElement("link");
         leafletCss.rel = "stylesheet";
         leafletCss.type = "text/css";
-        leafletCss.href = "https://unpkg.com/leaflet@1.8.0/dist/leaflet.css";
+        leafletCss.href = `${openstreetmapLeafletLocation}leaflet.css`;
         head.appendChild(leafletCss);
         var leafletScript = document.createElement("script");
         leafletScript.type = "text/javascript";
-        leafletScript.src = "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
+        leafletScript.src = `${openstreetmapLeafletLocation}leaflet.js`;
         head.appendChild(leafletScript);
         const tileUrls = {
             standard: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
