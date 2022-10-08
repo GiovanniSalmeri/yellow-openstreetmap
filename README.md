@@ -73,4 +73,4 @@ This extension uses [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Pag
 
 ## Developer
 
-Giovanni Salmeri. [Get help](https://github.com/GiovanniSalmeri/yellow-openstreetmap/issues).
+Giovanni Salmeri. [Get help](https://datenstrom.se/yellow/help/)
