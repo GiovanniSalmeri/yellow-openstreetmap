@@ -51,7 +51,7 @@ Embedding a map, different addresses:
 
     [openstreetmap "Roma"]
     [openstreetmap "Via Columbia 1, Roma" 17 center 100% 400 standard+marker]
-    [openstreetmap "Bredgatan 1, Lund, Sweden"  17 center 100% 400 standard+marker]
+    [openstreetmap "Bredgatan 1, Lund, Sweden" 17 center 100% 400 standard+marker]
 
 Embedding a map, different GPS coordinates:
 
