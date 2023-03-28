@@ -23,6 +23,8 @@ The following arguments are available, all but the first argument are optional:
 
 You can append `+marker` to the layers to show a marker. To get GPS coordinates, go to [OpenStreetMap](https://www.openstreetmap.org/) and enter the address. For more precision, select the "Share" icon on the right, then "Include marker", and drag the marker to the desidered location. The GPS coordinates are the last numbers of the URL shown in the browser. If the URL shown is `https://www.openstreetmap.org/#map=17/41.85181/12.62127`, then the GPS coordinates are `41.85181, 12.62127`.
 
+You should know that the service provider collects personal data and uses cookies.
+
 ## How to embed a map with points of interest
 
 Create an `[openstreetmap]` shortcut.
@@ -43,7 +45,9 @@ address,city,name,description
 latitude,longitude,name,description
 ```
 
-Fields that cointain commas must be enclosed in quotes. The third and fourth field are optional, if provided they will be used for a popup. An [API key](https://www.thunderforest.com/pricing/) is required for a map with points of interest using the `transport` layer.
+Fields that contain commas must be enclosed in quotes. The third and fourth field are optional, if provided they will be used for a popup. An [API key](https://www.thunderforest.com/pricing/) is required for a map with points of interest using the `transport` layer.
+
+You should know that the service provider collects personal data and uses cookies.
 
 ## Examples
 
@@ -90,4 +94,4 @@ This extension uses [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Pag
 
 ## Developer
 
-Giovanni Salmeri. [Get help](https://datenstrom.se/yellow/help/)
+Giovanni Salmeri. [Get help](https://datenstrom.se/yellow/help/).
