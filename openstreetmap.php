@@ -26,9 +26,9 @@ class YellowOpenstreetmap {
                 "humanitarian"=>"hot"
             ];
             list($address, $zoom, $style, $width, $height, $layer) = $this->yellow->toolbox->getTextArguments($text);
-            if (empty($zoom)) $zoom = $this->yellow->system->get("openstreetmapZoom");
-            if (empty($style)) $style = $this->yellow->system->get("openstreetmapStyle");
-            if (empty($layer)) $layer = $this->yellow->system->get("openstreetmapLayer");
+            if (is_string_empty($zoom)) $zoom = $this->yellow->system->get("openstreetmapZoom");
+            if (is_string_empty($style)) $style = $this->yellow->system->get("openstreetmapStyle");
+            if (is_string_empty($layer)) $layer = $this->yellow->system->get("openstreetmapLayer");
             list($layer, $marker) = $this->yellow->toolbox->getTextList($layer, "+", 2);
 
             if (strtolower(substr($address, -4))==".csv") { // leaflet
