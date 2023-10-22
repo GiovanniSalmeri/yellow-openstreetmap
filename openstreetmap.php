@@ -145,7 +145,7 @@ class YellowOpenstreetmap {
                     }
                     fclose($fileHandle);
                 } else {
-                    $this->yellow->log("error", "Can't write file '$fileName'!");
+                    $this->toolbox->log("error", "Can't write file '$fileName'!");
                 }
             }
         }
