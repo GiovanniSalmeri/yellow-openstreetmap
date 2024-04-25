@@ -2,7 +2,7 @@
 // Openstreetmap extension, https://github.com/GiovanniSalmeri/yellow-openstreetmap
 
 class YellowOpenstreetmap {
-    const VERSION = "0.8.20";
+    const VERSION = "0.9.1";
     public $yellow;         //access to API
 
     // Handle initialisation
@@ -16,7 +16,7 @@ class YellowOpenstreetmap {
     }
 
     // Handle page content parsing of custom block
-    public function onParseContentShortcut($page, $name, $text, $type) {
+    public function onParseContentElement($page, $name, $text, $attributes, $type) {
         $output = null;
         if ($name=="openstreetmap" && ($type=="block" || $type=="inline")) {
             $layers = [
@@ -124,7 +124,9 @@ class YellowOpenstreetmap {
     // Get geolocation
     private function geolocation($address) {
         $cache = [];
-        $fileName = $this->yellow->system->get("coreExtensionDirectory")."openstreetmap.csv";
+        $cacheDirectory = $this->yellow->system->get("coreCacheDirectory");
+        if ($cacheDirectory!=="" && !is_dir($cacheDirectory)) @mkdir($cacheDirectory, 0777, true);
+        $fileName = $cacheDirectory."openstreetmap.csv";
         $fileHandle = @fopen($fileName, "r");
         if ($fileHandle) {
             while ($data = fgetcsv($fileHandle)) {
@@ -156,11 +158,11 @@ class YellowOpenstreetmap {
     public function onParsePageExtra($page, $name) {
         $output = null;
         if ($name=="header") {
-            $extensionLocation = $this->yellow->system->get("coreServerBase").$this->yellow->system->get("coreExtensionLocation");
-            $output .= "<script>var openstreetmapLeafletLocation = ".json_encode($extensionLocation."openstreetmap-leaflet/")."</script>\n";
+            $assetLocation = $this->yellow->system->get("coreServerBase").$this->yellow->system->get("coreAssetLocation");
+            $output .= "<script>var openstreetmapLeafletLocation = ".json_encode($assetLocation."openstreetmap-leaflet/")."</script>\n";
             $openstreetmapTransportApiKey = $this->yellow->system->get("openstreetmapTransportApiKey");
             $output .= "<script>var openstreetmapTransportApiKey = ".json_encode($openstreetmapTransportApiKey)."</script>\n";
-            $output .= "<script type=\"text/javascript\" defer=\"defer\" src=\"{$extensionLocation}openstreetmap.js\"></script>\n";
+            $output .= "<script type=\"text/javascript\" defer=\"defer\" src=\"{$assetLocation}openstreetmap.js\"></script>\n";
         }
         return $output;
     }

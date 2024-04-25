@@ -1,5 +1,5 @@
-Openstreetmap 0.8.20
-====================
+# Openstreetmap 0.9.1
+
 Embed OpenStreetMap maps.
 
 <p align="center"><img src="SCREENSHOT.png" alt="Screenshot"></p>
