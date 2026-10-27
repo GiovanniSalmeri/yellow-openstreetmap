@@ -2,7 +2,7 @@
 // Openstreetmap extension, https://github.com/GiovanniSalmeri/yellow-openstreetmap
 
 class YellowOpenstreetmap {
-    const VERSION = "0.9.1";
+    const VERSION = "1.0.0";
     public $yellow;         //access to API
 
     // Handle initialisation
@@ -162,7 +162,7 @@ class YellowOpenstreetmap {
             $output .= "<script>var openstreetmapLeafletLocation = ".json_encode($assetLocation."openstreetmap-leaflet/")."</script>\n";
             $openstreetmapTransportApiKey = $this->yellow->system->get("openstreetmapTransportApiKey");
             $output .= "<script>var openstreetmapTransportApiKey = ".json_encode($openstreetmapTransportApiKey)."</script>\n";
-            $output .= "<script type=\"text/javascript\" defer=\"defer\" src=\"{$assetLocation}openstreetmap.js\"></script>\n";
+            $output .= "<script defer=\"defer\" src=\"{$assetLocation}openstreetmap.js\"></script>\n";
         }
         return $output;
     }

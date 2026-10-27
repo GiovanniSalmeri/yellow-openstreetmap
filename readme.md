@@ -1,8 +1,8 @@
-# Openstreetmap 0.9.1
+# Openstreetmap 1.0.0
 
-Embed OpenStreetMap maps.
+Embed OpenStreetMap maps. Developed by Giovanni Salmeri.
 
-<p align="center"><img src="SCREENSHOT.png" alt="Screenshot"></p>
+<p align="center"><img src="screenshot.png" alt="Screenshot"></p>
 
 ## How to install an extension
 
@@ -90,8 +90,6 @@ The following settings can be configured in file `system/extensions/yellow-syste
 
 ## Acknowledgements
 
-This extension uses [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) and [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim). Thank you for the free service. The extension includes [Leaflet 1.8.0](https://github.com/Leaflet/Leaflet) by Volodymyr Agafonkin for maps with points of interest. Thank you for the good work.
+This extension uses [OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) and [Nominatim](https://wiki.openstreetmap.org/wiki/Nominatim). Thank you for the free service. The extension includes [Leaflet 1.8.0](https://github.com/Leaflet/Leaflet) by Volodymyr Agafonkin for maps with points of interest. Thank you for the useful library.
 
-## Developer
-
-Giovanni Salmeri. [Get help](https://datenstrom.se/yellow/help/).
+Do you have questions? [Get help](https://datenstrom.se/yellow/help/).
